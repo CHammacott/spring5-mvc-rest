@@ -1,14 +1,11 @@
 package guru.springfamework.controller.v1;
 
-import guru.springfamework.api.v1.mapper.VendorMapper;
 import guru.springfamework.api.v1.model.VendorDTO;
 import guru.springfamework.api.v1.model.VendorListDTO;
-import guru.springfamework.domain.Vendor;
 import guru.springfamework.services.VendorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value ="onlinestore",description = "This is the Vendor Controller")
