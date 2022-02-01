@@ -1,7 +1,7 @@
 package guru.springfamework.services;
 
 import guru.springfamework.api.v1.mapper.CustomerMapper;
-import guru.springfamework.api.v1.model.CustomerDTO;
+import guru.springframework.model.CustomerDTO;
 import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CustomerRepository;
 import org.junit.Before;
@@ -38,13 +38,13 @@ public class CustomerServiceImplTest {
         //given
         Customer customer1 = new Customer();
         customer1.setId(1l);
-        customer1.setFirstName("Michale");
-        customer1.setLastName("Weston");
+        customer1.setFirstname("Michale");
+        customer1.setLastname("Weston");
 
         Customer customer2 = new Customer();
         customer2.setId(2l);
-        customer2.setFirstName("Sam");
-        customer2.setLastName("Axe");
+        customer2.setFirstname("Sam");
+        customer2.setLastname("Axe");
 
         when(customerRepository.findAll()).thenReturn(Arrays.asList(customer1, customer2));
 
@@ -61,15 +61,15 @@ public class CustomerServiceImplTest {
         //given
         Customer customer1 = new Customer();
         customer1.setId(1l);
-        customer1.setFirstName("Michale");
-        customer1.setLastName("Weston");
+        customer1.setFirstname("Michale");
+        customer1.setLastname("Weston");
 
         when(customerRepository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(customer1));
 
         //when
         CustomerDTO customerDTO = customerService.getCustomerById(1L);
 
-        assertEquals("Michale", customerDTO.getFirstName());
+        assertEquals("Michale", customerDTO.getFirstname());
     }
 
     @Test
@@ -77,11 +77,11 @@ public class CustomerServiceImplTest {
 
         //given
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setFirstName("Jim");
+        customerDTO.setFirstname("Jim");
 
         Customer savedCustomer = new Customer();
-        savedCustomer.setFirstName(customerDTO.getFirstName());
-        savedCustomer.setLastName(customerDTO.getLastName());
+        savedCustomer.setFirstname(customerDTO.getFirstname());
+        savedCustomer.setLastname(customerDTO.getLastname());
         savedCustomer.setId(1l);
 
         when(customerRepository.save(any(Customer.class))).thenReturn(savedCustomer);
@@ -90,7 +90,7 @@ public class CustomerServiceImplTest {
         CustomerDTO savedDto = customerService.createNewCustomer(customerDTO);
 
         //then
-        assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
-        assertEquals("/api/v1/customers/1", savedDto.getCustomer_url());
+        assertEquals(customerDTO.getFirstname(), savedDto.getFirstname());
+        assertEquals("/api/v1/customers/1", savedDto.getCustomerUrl());
     }
 }

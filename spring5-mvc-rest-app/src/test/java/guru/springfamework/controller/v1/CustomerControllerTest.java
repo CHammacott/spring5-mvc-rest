@@ -1,6 +1,6 @@
 package guru.springfamework.controller.v1;
 
-import guru.springfamework.api.v1.model.CustomerDTO;
+import guru.springframework.model.CustomerDTO;
 import guru.springfamework.services.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,14 +43,14 @@ public class CustomerControllerTest {
 
         //given
         CustomerDTO customer1 = new CustomerDTO();
-        customer1.setFirstName("Michale");
-        customer1.setLastName("Weston");
-        customer1.setCustomer_url("/api/v1/customer/1");
+        customer1.setFirstname("Michale");
+        customer1.setLastname("Weston");
+        customer1.setCustomerUrl("/api/v1/customer/1");
 
         CustomerDTO customer2 = new CustomerDTO();
-        customer2.setFirstName("Sam");
-        customer2.setLastName("Axe");
-        customer2.setCustomer_url("/api/v1/customer/2");
+        customer2.setFirstname("Sam");
+        customer2.setLastname("Axe");
+        customer2.setCustomerUrl("/api/v1/customer/2");
 
         when(customerService.getAllCustomers()).thenReturn(Arrays.asList(customer1, customer2));
 
@@ -66,9 +66,9 @@ public class CustomerControllerTest {
 
         //given
         CustomerDTO customer1 = new CustomerDTO();
-        customer1.setFirstName("Michale");
-        customer1.setLastName("Weston");
-        customer1.setCustomer_url("/api/v1/customers/1");
+        customer1.setFirstname("Michale");
+        customer1.setLastname("Weston");
+        customer1.setCustomerUrl("/api/v1/customers/1");
 
         when(customerService.getCustomerById(anyLong())).thenReturn(customer1);
 
@@ -77,7 +77,7 @@ public class CustomerControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName", equalTo("Michale")));
+                .andExpect(jsonPath("$.firstname", equalTo("Michale")));
     }
 
 }

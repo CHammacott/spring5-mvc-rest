@@ -1,7 +1,7 @@
 package guru.springfamework.services;
 
 import guru.springfamework.api.v1.mapper.CustomerMapper;
-import guru.springfamework.api.v1.model.CustomerDTO;
+import guru.springframework.model.CustomerDTO;
 import guru.springfamework.controller.v1.CustomerController;
 import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CustomerRepository;
@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .stream()
                 .map(customer -> {
                     CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-                    customerDTO.setCustomer_url(getUrl() + customer.getId());
+                    customerDTO.setCustomerUrl(getUrl() + customer.getId());
                     return customerDTO;
                 })
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(customerMapper::customerToCustomerDTO)
                 .map(customerDTO -> {
                     //set API URL
-                    customerDTO.setCustomer_url(getUrl() + id);
+                    customerDTO.setCustomerUrl(getUrl() + Long.valueOf(id));
                     return customerDTO;
                 })
                 .orElseThrow(ResourceNotFoundException::new); //todo implement better exception handling
@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerDTO returnDTO = customerMapper.customerToCustomerDTO(savedCustomer);
 
-        returnDTO.setCustomer_url(getUrl() + savedCustomer.getId());
+        returnDTO.setCustomerUrl(getUrl() + savedCustomer.getId());
         return returnDTO;
     }
 
@@ -72,12 +72,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO patchCustomer(Long id, CustomerDTO customerDTO) {
         return customerRepository.findById(id).map(customer -> {
-            if (customerDTO.getFirstName() != null){
-                customer.setFirstName(customerDTO.getFirstName());
+            if (customerDTO.getFirstname() != null){
+                customer.setFirstname(customerDTO.getFirstname());
             }
 
-            if (customerDTO.getLastName() != null){
-                customer.setLastName(customerDTO.getLastName());
+            if (customerDTO.getLastname() != null){
+                customer.setLastname(customerDTO.getLastname());
             }
 
             return saveAndReturnDTO(customer);
